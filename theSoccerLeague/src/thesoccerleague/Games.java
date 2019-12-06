@@ -31,11 +31,10 @@ public class Games {
     ArrayList<Games> gameList = new ArrayList<Games>();
     
     
-    void determineScore()
+    void determineScore(int todayTemp)
     {
         //generate random team score based on today's temperature
-        
-        
+        this.todayTemp = todayTemp;
         
         this.team1Score = rn.nextInt((this.todayTemp/10));
         
@@ -48,8 +47,19 @@ public class Games {
         
         String myMessage = "";
         
+        int hottestTemp = 0;
+        int avgTemp = 0;
+        
         for(Games game: gameList)
         {
+            //check to find hottest temp of season
+            if(game.todayTemp > hottestTemp)
+            {
+                hottestTemp = game.todayTemp;
+            }
+            
+            //find average temp
+            avgTemp += game.todayTemp;
             
             //create string for message including game number, day's temperature, team names and scores 
             myMessage = "Season Statistics \n\n\n" + "Game #" + game.idNumb + "\n" + "Day's Temperature:" + game.todayTemp + "\n" +
@@ -57,6 +67,11 @@ public class Games {
                     + ": " + game.team2Score + "\n\n\n";
             
         }
+        
+        avgTemp = avgTemp/gameList.size();
+        
+        myMessage += "Hottest Temperature:" + hottestTemp 
+                + "\n Average Temperature:" + avgTemp + "\n\n";
         
         JOptionPane.showMessageDialog(null, myMessage, "Game Statistics", JOptionPane.PLAIN_MESSAGE);
         
