@@ -60,6 +60,19 @@ public class Teams {
     Teams(String teamName)
     {
         this.teamName = teamName;
+        
+        Scheduler.teamList.add(this);
+        
+    }
+    
+    static String teamAvgMessage(String message)
+    {
+        for(Teams team: Scheduler.teamList)
+        {
+            message += team.teamName + ": \n Total Wins:" + team.getWinTotal() + "\n Total Ties:" + team.getTieTotal() 
+                    + "\n Total Goals Scored:" + team.getTotalGoalsScored() + "\n Total Goals Allowed" + team.getTotalGoalsAllowed() + "\n\n\n";
+        }
+        return message;
     }
     
     
