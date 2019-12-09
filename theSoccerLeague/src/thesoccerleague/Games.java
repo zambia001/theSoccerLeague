@@ -7,7 +7,10 @@ package thesoccerleague;
 
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 
 public class Games {
@@ -31,6 +34,7 @@ public class Games {
     static ArrayList<Games> gameList = new ArrayList<Games>();
     
     
+    
     //determine score
     void determineScore(int todayTemp)
     {
@@ -44,38 +48,44 @@ public class Games {
     static void seasonStatistics()
     {
         
-        String myMessage = "";
+        String myMessage = "Season Statistics \n";
         
-        myMessage += Teams.teamAvgMessage(myMessage);
+        myMessage = myMessage + Teams.teamAvgMessage(myMessage);
         
         int hottestTemp = 0;
         int avgTemp = 0;
         
         for(Games game: gameList)
         {
-            //check to find hottest temp of season
-            if(game.todayTemp > hottestTemp)
-            {
-                hottestTemp = game.todayTemp;
-            }
-            
-            //find average temp
-            avgTemp += game.todayTemp;
+           
             
             //create string for message including game number, day's temperature, team names and scores 
-            myMessage = "Season Statistics \n\n\n" + "Game #" + game.idNumb + "\n" + "Day's Temperature:" + game.todayTemp + "\n" +
+            myMessage = myMessage + "Game #" + game.idNumb + "\n" + "Day's Temperature:" + game.todayTemp + "\n" +
                     game.team1.getTeamName() + ": " + game.team1Score + "\n" + game.team2.getTeamName()
                     + ": " + game.team2Score + "\n\n\n";
             
+            
         }
-        //divide for avg temp
-        avgTemp = avgTemp/gameList.size();
+       
+         //check to find hottest temp of season
+            //and average temp
+        for(Integer numb: Scheduler.tempList)
+           {
+               avgTemp += numb;
+               
+               if(numb > hottestTemp)
+               {
+                hottestTemp = numb;
+               }
+           }
         
+        avgTemp = avgTemp/Scheduler.tempList.size();
         //add temperatures to the message
         myMessage += "Hottest Temperature:" + hottestTemp 
                 + "\n Average Temperature:" + avgTemp + "\n\n";
         
-        JOptionPane.showMessageDialog(null, myMessage, "Game Statistics", JOptionPane.PLAIN_MESSAGE);
+        
+        System.out.println(myMessage);
         
     }
     void setStatistics(Teams team1, Teams team2)
@@ -128,6 +138,8 @@ public class Games {
             team2.setTieTotal(ties2);
         }
     }
+    
+    
     
     
     //constructor

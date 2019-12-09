@@ -13,12 +13,14 @@ public class Scheduler {
     Random rn = new Random();
     
     static ArrayList<Teams> teamList = new ArrayList<Teams>();
+    static ArrayList<Integer> tempList = new ArrayList<Integer>();
     
     static Boolean summer = true;
    
     static boolean one = false;
     static boolean two = false;
     static boolean three = false;
+    
     
     Teams team1;
     Teams team2;
@@ -32,6 +34,8 @@ public class Scheduler {
             String temp = JOptionPane.showInputDialog("Enter Temperature(F) in Whole Numbers:");
         
             int todayTemp = Integer.parseInt(temp);
+            
+            tempList.add(todayTemp);
         
             if(todayTemp <= 32)
             {
@@ -63,8 +67,8 @@ public class Scheduler {
                 int r3 = rn.nextInt(teamList.size());
                 int r4 = rn.nextInt(teamList.size());
             
-                checkTeams(r1, r2);
-                checkTeams(r3, r4);
+                r2 = checkTeams(r1, r2);
+                r4 = checkTeams(r3, r4);
             
                 Games game1 = new Games(teamList.get(r1), teamList.get(r2));
                 Games game2 = new Games(teamList.get(r3), teamList.get(r4));
@@ -80,7 +84,7 @@ public class Scheduler {
         Games.seasonStatistics();
     }
     
-    void checkTeams(int r1, int r2)
+    int checkTeams(int r1, int r2)
     {
           if(r1 == r2)
             {
@@ -90,5 +94,6 @@ public class Scheduler {
                 }
             }
          
+          return r2;
     }
 }

@@ -70,7 +70,7 @@ public class Teams {
         for(Teams team: Scheduler.teamList)
         {
             message += team.teamName + ": \n Total Wins:" + team.getWinTotal() + "\n Total Ties:" + team.getTieTotal() 
-                    + "\n Total Goals Scored:" + team.getTotalGoalsScored() + "\n Total Goals Allowed" + team.getTotalGoalsAllowed() + "\n\n\n";
+                    + "\n Total Goals Scored:" + team.getTotalGoalsScored() + "\n Total Goals Allowed:" + team.getTotalGoalsAllowed() + "\n\n\n";
         }
         return message;
     }
